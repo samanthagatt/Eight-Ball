@@ -11,10 +11,23 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBAction func flipEightBall(_ sender: Any) {
+        answerLabel.text = generateAnswer()
+    }
+    
+    private var lastAnswer = ""
+    private func generateAnswer() -> String {
         
-        let index = Int(arc4random_uniform(UInt32(answers.count)))
-        let answer = answers[index]
-        answerLabel.text = answer
+        var result = ""
+        repeat {
+            let index = Int(arc4random_uniform(UInt32(answers.count)))
+            result = answers[index]
+        } while result == lastAnswer
+        
+        
+        lastAnswer = result
+        
+        return result
+        
     }
     
     @IBOutlet weak var answerLabel: UILabel!
